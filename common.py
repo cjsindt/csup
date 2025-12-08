@@ -77,7 +77,7 @@ def read_csup_xml():
 def process_csup(airport):
     apt_id = airport.find('aptid').text
     pages = airport.find('pages')
-    pdfs = pages.findall('pdf')
+    pdfs = pages.findall('pdf')[50:60]
 
     if apt_id is None:
         return
