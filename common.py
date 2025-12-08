@@ -98,8 +98,8 @@ def process_csup(airport):
         magick -density 300 \
                -trim +repage \
                -background white -alpha remove -alpha off \
-               PNG32:"{apt_dir}/{base}_{page}.png" \
-               {fn}
+               "{fn}[{page}]" \
+               PNG32:"{apt_dir}/{base}_{page}.png"
         """
         call_script(cmd)
         page = page + 1
