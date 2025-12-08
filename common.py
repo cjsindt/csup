@@ -93,7 +93,14 @@ def process_csup(airport):
         tokens = fn.split("_")
         base = ("CSUP-" + tokens[0]).upper()  # add region to name
 
-        cmd = f'mogrify -trim +repage -dither none -antialias -density 225 -depth 8 -background white  -alpha remove -alpha off -colors 15 -format png -quality 100 -write {apt_dir}/{base}_{page}.png {fn}'
+        #cmd = f'mogrify -trim +repage -dither none -antialias -density 225 -depth 8 -background white  -alpha remove -alpha off -colors 15 -format png -quality 100 -write {apt_dir}/{base}_{page}.png {fn}'
+        cmd = f"""
+        magick -density 300 \
+               -trim +repage \
+               -background white -alpha remove -alpha off \
+               PNG32:"{apt_dir}/{base}_{page}.png" \
+               {fn}
+        """
         call_script(cmd)
         page = page + 1
 
