@@ -35,7 +35,7 @@ def list_crawl(url, match):
         if re.search(match, link_x):
             charts.append(link_x)
     list_set = set(charts)  # unique
-    return list(list_set)
+    return list(list_set)[0]
 
 
 def download(url):
