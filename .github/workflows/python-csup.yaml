@@ -45,13 +45,3 @@ jobs:
           SC_CSUP.zip
           NE_CSUP.zip
           SE_CSUP.zip
-
-    - name: SSH to mamba
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: apps4av.org
-        username: apps4av
-        password: ${{ secrets.MAMBA_PASSWORD }}
-        port: 22
-        source: "AK_CSUP.zip,PAC_CSUP.zip,NW_CSUP.zip,SW_CSUP.zip,NC_CSUP.zip,EC_CSUP.zip,SC_CSUP.zip,NE_CSUP.zip,SE_CSUP.zip"
-        target: /home/apps4av/mamba.dreamhosters.com/new/staging
