@@ -94,7 +94,7 @@ def process_csup(airport):
         base = ("CSUP-" + tokens[0]).upper()  # add region to name
 
         #cmd = f'mogrify -trim +repage -dither none -antialias -density 300 -background white -alpha remove -alpha off -format png -quality 100 -write {apt_dir}/{base}_{page}.png {fn}'
-        cmd = f'magick -density 400 {fn} -trim +repage -background white -alpha remove -alpha off -dither none -unsharp 0x0.8+0.8+0.01 -define png:compression-level=9 {apt_dir}/{base}_{page}.png'
+        cmd = f'convert -density 400 {fn} -trim +repage -background white -alpha remove -alpha off -dither none -unsharp 0x0.8+0.8+0.01 -define png:compression-level=9 {apt_dir}/{base}_{page}.png'
         call_script(cmd)
         page = page + 1
 
