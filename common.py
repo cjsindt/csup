@@ -35,7 +35,7 @@ def list_crawl(url, match):
         if re.search(match, link_x):
             charts.append(link_x)
     list_set = set(charts)  # unique
-    return list(list_set)[0:5]
+    return list(list_set)
 
 
 def download(url):
@@ -77,7 +77,7 @@ def read_csup_xml():
 def process_csup(airport):
     apt_id = airport.find('aptid').text
     pages = airport.find('pages')
-    pdfs = pages.findall('pdf')[50:60]
+    pdfs = pages.findall('pdf')
 
     if apt_id is None:
         return
@@ -93,7 +93,8 @@ def process_csup(airport):
         tokens = fn.split("_")
         base = ("CSUP-" + tokens[0]).upper()  # add region to name
 
-        cmd = f'mogrify -trim +repage -dither none -antialias -density 300 -background white -alpha remove -alpha off -format png -quality 100 -write {apt_dir}/{base}_{page}.png {fn}'
+        #cmd = f'mogrify -trim +repage -dither none -antialias -density 300 -background white -alpha remove -alpha off -format png -quality 100 -write {apt_dir}/{base}_{page}.png {fn}'
+        cmd = f'magick -density 400 {fn} -trim +repage -background white -alpha remove -alpha off -dither none -unsharp 0x0.8+0.8+0.01 -define png:compression-level=9 {apt_dir}/{base}_{page}.png'
         call_script(cmd)
         page = page + 1
 
